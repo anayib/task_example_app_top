@@ -19,6 +19,7 @@ function Login() {
         alert('User not authorized. Please try again.');
       }
     } catch (error) {
+      setError(error.message);
       console.error('Login error:', error.message);
       alert('An error occurred during login. Please try again.');
     }

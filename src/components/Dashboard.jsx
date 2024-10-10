@@ -51,7 +51,7 @@ function Dashboard() {
   const  handleLogout = () => {
     console.log('Logging out...');
     logout();
-    navigate('/login');
+    navigate('/');
   }
 
   return (
