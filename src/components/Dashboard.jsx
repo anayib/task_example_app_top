@@ -1,5 +1,6 @@
-import { useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import { logout } from "../services/authService";
 
 function Dashboard() {
   const { tasks } = useLoaderData();  // The data loaded by the loader
@@ -7,7 +8,7 @@ function Dashboard() {
   const [newTask, setNewTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTaskTitle, setEditingTaskTitle] = useState('');
-
+  const navigate = useNavigate();
   // Function to update task status
   const updateTaskStatus = (id, newStatus) => {
     setTaskList(taskList.map(task => 
@@ -47,8 +48,22 @@ function Dashboard() {
     setEditingTaskId(null)
   }
 
+  const  handleLogout = () => {
+    console.log('Logging out...');
+    logout();
+    navigate('/login');
+  }
+
   return (
     <div className="container mx-auto p-6">
+        <nav>
+            <button 
+              onClick={handleLogout} 
+              className= "bg-purple-500 text-white px-4 py-2 rounded"  
+            >
+               Logout
+            </button>
+        </nav>
       <h1 className="text-2xl font-bold mb-4">Tasks</h1>
       {/* Add new task for*/}
       <form onSubmit={addTask} className="mb-6">
@@ -115,7 +130,7 @@ function Dashboard() {
                     Delete
                   </button>
                   <button 
-                    className="bg-red-500 text-white px-2 py-1 rounded"
+                    className="bg-orange-500 text-white px-2 py-1 rounded"
                     onClick={() => startEditingTask(task)}
                   >
                     Edit

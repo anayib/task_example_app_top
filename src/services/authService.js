@@ -3,7 +3,6 @@
 // (e.g., login, logout, token storage), and may also handle token validation
 
 async function login({ userName, password }) {
-  console.log('INSIDE LOGIN', userName, password);
   
   try {
     const validCredentials = await new Promise((resolve) => {
@@ -12,7 +11,6 @@ async function login({ userName, password }) {
       }, 2000);
     });
 
-    console.log('INSIDE LOGIN AUTHO', validCredentials);
     
     if (validCredentials) {
       localStorage.setItem('authToken', 'asfas58934hnsdf');
